@@ -22,6 +22,7 @@ export type Segment =
 const PG = (ch: number, n: number): Segment => ({ type: "page", src: `/comics/ch${ch}/p${String(n).padStart(2, "0")}.webp` });
 const P = (n: number) => PG(1, n);
 const P2 = (n: number) => PG(2, n);
+const P3 = (n: number) => PG(3, n);
 const C = (text: string): Segment => ({ type: "caption", text });
 const L = (text: string): Segment => ({ type: "caption", text, label: true });
 
@@ -96,7 +97,51 @@ const ch2Segments: Segment[] = [
   C("Past the exit, while the boys celebrate, Rei finds a wall that shouldn't be there."),
   P2(12),
   C("REN_K. Her brother's username. He was here. And he left a warning."),
-  { type: "caption", end: true, text: "Next — Chapter 3: Speedrun. Rei has a message from her missing brother. And the cat is still watching." },
+  { type: "caption", end: true, text: "Next — Chapter 3: Speedrun. Rei has a message from her missing brother. And the cat is still watching.", href: "/read/chapter-3-speedrun/", cta: "Read Chapter 3 →" },
+];
+
+const ch3Segments: Segment[] = [
+  L("The Grid — The same second"),
+  C("Rei is staring at her missing brother's name. And the last thing he wrote is a warning about the cat."),
+  P3(1),
+  C("Rei could tell the others. She doesn't, not until she knows who to trust."),
+  C("Meanwhile, Byte has picked up a signal from the real world. It's bad."),
+  P3(2),
+  C("The Glitch King is deleting Nexa City's power grid. In ten minutes the real city goes dark: every light, every train, every screen."),
+  C("There's one way to stop it. In a game, a save point locks your progress. In the Grid, a save point locks the real world. Reach it first, and the power stays on."),
+  L("The Neon Highway"),
+  C("Byte opens a shortcut to the start line. The word \"first\" turns out to matter, because someone else is racing too."),
+  P3(3),
+  C("The Glitch Rider is the King's fastest player, and it has never lost. The Squad has no car, no plan, and nine minutes left."),
+  C("No car? Byte can build one. Probably."),
+  P3(4),
+  C("On a board Kai is the fastest thing in the Grid. The cart is fast too, as long as Zuggi keeps dashing it."),
+  P3(5),
+  C("The Rider doesn't race fair. Every road it passes, it deletes behind it."),
+  C("One more rule of the Grid: a person deleted in Nexa City doesn't vanish right away. They drop into the Grid as a glowing file. Catch the file before it fades, and that person can come back."),
+  C("His name is Pip. His mom was deleted an hour ago. He logged in to find her. He found her file. And the road is falling out from under him."),
+  P3(6),
+  C("Kai can win the race or save the kid. Not both."),
+  P3(7),
+  L("The save point"),
+  C("The Rider doesn't stop for anyone."),
+  P3(8),
+  C("Ten minutes ago, Nexa City had power. Now it doesn't. But Pip still has his mom's file."),
+  C("Byte can send a file back to the real world. Just one, and just this once."),
+  P3(9),
+  L("Nexa City — In the dark"),
+  C("Somewhere in the blackout, a mother and her son find each other. For Pip, the lights don't matter."),
+  C("Back in the Grid, Byte does something it has never done before."),
+  P3(10),
+  C("Rei knows that voice. It's her brother's. She hasn't heard it in a year."),
+  C("She says nothing again. Now she has two secrets."),
+  L("The broken highway — Later"),
+  C("Pip logs out to go home. He has one thing to say first."),
+  P3(11),
+  C("Nobody notices Jinx leave. Nobody ever does."),
+  L("The Glitch King's tower"),
+  P3(12),
+  { type: "caption", end: true, text: "Next — Chapter 4: Boss Rush. The Squad storms the King's tower. But the King already knows they're coming." },
 ];
 
 export const chapters: Chapter[] = [
@@ -134,7 +179,23 @@ export const chapters: Chapter[] = [
       { name: "Jinx", img: "/img/char-cat.webp", line: "Was left behind in Nexa City. Somehow isn't." },
     ],
   },
-  { slug: "chapter-3-rooftop-runners", number: 3, title: "Rooftop Runners", synopsis: "Kai and Zuggi take the fastest route across the city, straight over it.", cover: "/img/ch3.webp", pages: [], panelCount: 8 },
+  {
+    slug: "chapter-3-speedrun",
+    number: 3,
+    title: "Speedrun",
+    synopsis: "The King is deleting Nexa City's power grid, and the only way to stop it is to beat his Glitch Rider to the save point. Kai is about to win when he sees a kid chasing his deleted mom's file across a collapsing road. The race, the lights, and one secret too many.",
+    cover: "/comics/ch3/cover.webp",
+    pages: Array.from({ length: 12 }, (_, i) => `/comics/ch3/p${String(i + 1).padStart(2, "0")}.webp`),
+    panelCount: 0,
+    segments: ch3Segments,
+    cast: [
+      { name: "Zuggi", img: "/img/char-fox.webp", line: "Pushes a shopping cart. Very fast." },
+      { name: "Kai Vega", img: "/img/char-skater.webp", line: "Fastest thing in the Grid. Has a choice to make." },
+      { name: "Rei Kurogane", img: "/img/char-katana.webp", line: "Just erased her brother's warning. Told no one." },
+      { name: "Byte", img: "/img/char-robot.webp", line: "Builds cars. Sort of." },
+      { name: "Jinx", img: "/img/char-cat.webp", line: "Innocent. Definitely. Probably." },
+    ],
+  },
   { slug: "chapter-4-bytes-secret", number: 4, title: "Byte's Secret", synopsis: "Byte has been carrying something it was never supposed to find.", cover: "/img/ch4.webp", pages: [], panelCount: 8 },
   { slug: "chapter-5-nine-lives", number: 5, title: "Nine Lives", synopsis: "Jinx has had a few close calls. Eight, to be exact.", cover: "/img/ch5.webp", pages: [], panelCount: 8 },
   { slug: "chapter-6-neon-storm", number: 6, title: "Neon Storm", synopsis: "The storm hits Neon City and the whole squad has to hold the line.", cover: "/img/ch6.webp", pages: [], panelCount: 8 },
