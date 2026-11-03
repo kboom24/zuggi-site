@@ -31,9 +31,9 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-night via-night/60 to-transparent md:via-transparent md:via-30%" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-night to-transparent" />
         </div>
-        <div className={`${wrap} relative flex min-h-[340px] items-center py-12 md:min-h-[320px] lg:min-h-[360px]`}>
+        <div className={`${wrap} relative flex min-h-[340px] items-center py-10 md:min-h-[300px] lg:min-h-[315px] xl:min-h-[330px]`}>
           <div className="max-w-2xl">
-            <h1 className="font-display lg:whitespace-nowrap text-[40px] font-medium uppercase leading-[1.05] tracking-[0.01em] drop-shadow-[0_2px_12px_rgba(0,0,0,.6)] sm:text-[52px] lg:text-[58px]">
+            <h1 className="font-display lg:whitespace-nowrap text-[40px] font-medium uppercase leading-[1.05] tracking-[0.01em] drop-shadow-[0_2px_12px_rgba(0,0,0,.6)] sm:text-[50px] lg:text-[54px]">
               Zuggi Squad - Season 1
             </h1>
             <div className="mt-6 flex flex-wrap gap-4">
@@ -49,7 +49,7 @@ export default function Home() {
       </section>
 
       {/* WATCH */}
-      <section className={`${wrap} pt-7`} aria-labelledby="watch-h">
+      <section className={`${wrap} pt-5`} aria-labelledby="watch-h">
         <SectionTitle href="/watch/"><span id="watch-h">Watch</span></SectionTitle>
         <div className="scroll-row -mx-4 flex gap-4 overflow-x-auto px-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 lg:grid-cols-4">
           {episodes.slice(0, 4).map((ep) => (
