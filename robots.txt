@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /zuggi-site/search/
+
+Sitemap: https://kboom24.github.io/zuggi-site/sitemap.xml

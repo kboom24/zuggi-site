@@ -1,0 +1,36 @@
+<!doctype html>
+<!-- PLACEHOLDER demo build so the game frame can be tested end to end.
+     Replace with a real HTML5 / WebGL / Unity WebGL build hosted on Cloudflare R2. -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Neon Drift (demo)</title>
+<style>
+html,body{margin:0;height:100%;background:#0d0717;overflow:hidden;font-family:system-ui,sans-serif;color:#fff}
+canvas{display:block;width:100%;height:100%}
+#hud{position:fixed;left:12px;top:10px;font-weight:700;letter-spacing:.05em;text-shadow:0 0 8px #ff0b8a}
+#msg{position:fixed;inset:0;display:grid;place-items:center;text-align:center;pointer-events:none}
+#msg b{display:block;font-size:34px;font-style:italic;color:#ff0b8a;text-shadow:3px 3px 0 #000,5px 2px 0 #00f0ff}
+</style></head><body>
+<canvas id="c"></canvas><div id="hud">SCORE 0</div><div id="msg"><div><b>NEON DRIFT</b>DEMO · press ← → or tap to steer</div></div>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d'),hud=document.getElementById('hud'),msg=document.getElementById('msg');
+let W,H,lane=1,carX=0,obs=[],t=0,score=0,speed=5,dead=false,started=false;
+function rs(){W=c.width=innerWidth*devicePixelRatio;H=c.height=innerHeight*devicePixelRatio}addEventListener('resize',rs);rs();
+const L=()=>W*.5+(lane-1)*W*.22;
+function key(d){if(dead){obs=[];score=0;speed=5;dead=false}started=true;msg.style.display='none';lane=Math.max(0,Math.min(2,lane+d))}
+addEventListener('keydown',e=>{if(['ArrowLeft','a','A'].includes(e.key))key(-1);if(['ArrowRight','d','D'].includes(e.key))key(1)});
+addEventListener('pointerdown',e=>key(e.clientX<innerWidth/2?-1:1));
+function frame(){t++;x.fillStyle='#0d0717';x.fillRect(0,0,W,H);
+ // road
+ x.fillStyle='#1a0d2e';x.fillRect(W*.15,0,W*.7,H);
+ for(let i=0;i<4;i++){x.fillStyle=i%3?'rgba(0,240,255,.5)':'#ff0b8a';const lx=W*.15+i*W*.7/3;x.fillRect(lx-2,0,4,H)}
+ for(let y=(t*speed*2)%80-80;y<H;y+=80){x.fillStyle='rgba(199,44,255,.25)';x.fillRect(W*.39-2,y,4,40);x.fillRect(W*.61-2,y,4,40)}
+ carX+=(L()-carX)*.25;
+ if(started&&!dead){if(t%Math.max(18,50-score/5|0)===0)obs.push({l:Math.random()*3|0,y:-80});speed=5+score/40;score++}
+ obs.forEach(o=>{o.y+=speed*devicePixelRatio;const ox=W*.5+(o.l-1)*W*.22;x.fillStyle='#00f0ff';x.shadowColor='#00f0ff';x.shadowBlur=20;x.fillRect(ox-W*.06,o.y,W*.12,40*devicePixelRatio);
+  if(!dead&&Math.abs(ox-carX)<W*.1&&Math.abs(o.y-(H-140*devicePixelRatio))<50*devicePixelRatio){dead=true;msg.style.display='grid';msg.innerHTML='<div><b>CRASH!</b>Score '+(score/10|0)+' · press a key to retry</div>'}});
+ obs=obs.filter(o=>o.y<H+100);
+ x.shadowColor='#ff0b8a';x.shadowBlur=30;x.fillStyle='#ff0b8a';const cw=W*.09,ch=110*devicePixelRatio;x.fillRect(carX-cw/2,H-ch-60*devicePixelRatio,cw,ch);x.shadowBlur=0;
+ x.fillStyle='#fff';x.fillRect(carX-cw/2+6,H-ch-50*devicePixelRatio,cw-12,ch*.25);
+ hud.textContent='SCORE '+(score/10|0);requestAnimationFrame(frame)}
+frame();
+</script></body></html>
