@@ -38,6 +38,42 @@ export default async function ChapterPage({ params }: Props) {
         <p className="mx-auto mt-2 max-w-lg text-white/75">{ch.synopsis}</p>
       </header>
 
+      {ch.cast && (
+        <details open className="mx-auto mt-8 max-w-[640px] rounded-lg border border-white/10 bg-[#1A0D2E] p-4">
+          <summary className="cursor-pointer font-display text-xs font-medium uppercase tracking-[0.25em] text-cyan">Meet the players</summary>
+          <ul className="mt-4 grid grid-cols-5 gap-2 sm:gap-3">
+            {ch.cast.map((c) => (
+              <li key={c.name} className="text-center">
+                <img src={asset(c.img)} alt={c.name} loading="eager" className="mx-auto aspect-square w-full rounded-full border-2 border-magenta object-cover object-top" />
+                <p className="mt-1 text-xs font-semibold sm:text-sm">{c.name}</p>
+                <p className="hidden text-[11px] leading-snug text-white/65 sm:block">{c.line}</p>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
+
+      {ch.segments ? (
+        <div className="mt-10" aria-label="Comic pages">
+          {(() => {
+            let n = 0;
+            const total = ch.segments!.filter((s) => s.type === "page").length;
+            return ch.segments!.map((s, i) => {
+              if (s.type === "page") {
+                n++;
+                return <img key={i} src={asset(s.src)} alt={`${ch.title}, page ${n} of ${total}`} width={720} height={1280} loading={n < 2 ? "eager" : "lazy"} decoding="async" className="mx-auto my-10 block h-auto w-full max-w-[800px] rounded-sm" />;
+              }
+              if (s.label) return <p key={i} className="mx-auto my-12 max-w-[640px] text-center font-display text-sm font-semibold uppercase tracking-[0.3em] text-cyan">{s.text}</p>;
+              return (
+                <div key={i} className={`mx-auto my-8 max-w-[640px] rounded-md border-l-4 ${s.end ? "border-cyan text-center" : "border-magenta"} bg-[#1A0D2E] px-6 py-5 text-[18px] leading-relaxed text-white sm:text-[19px]`}>
+                  {s.speaker && <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-cyan">{s.speaker}</p>}
+                  <p className={s.speaker ? "" : "italic"}>{s.text}</p>
+                </div>
+              );
+            });
+          })()}
+        </div>
+      ) : (<>
       {ch.pages.length === 0 && (
         <div className="mt-8 overflow-hidden rounded-lg border border-line bg-white">
           <img src={asset(ch.cover)} alt={`Chapter ${ch.number} cover`} className="w-full grayscale" />
@@ -61,6 +97,7 @@ export default async function ChapterPage({ params }: Props) {
               </figure>
             ))}
       </div>
+      </>)}
 
       <div className="mt-8 flex items-center justify-between gap-4">
         {prev ? <Link href={`/read/${prev.slug}/`} className="rounded-md border border-white/15 px-4 py-2 text-sm hover:border-cyan">← Ch {prev.number}</Link> : <span />}
