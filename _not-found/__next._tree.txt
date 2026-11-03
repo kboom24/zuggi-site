@@ -1,5 +1,5 @@
-:HL["/zuggi-site/_next/static/chunks/21pw-93zpu6of.css","style"]
+:HL["/zuggi-site/_next/static/chunks/04pmwz-xzdewp.css","style"]
 :HL["/zuggi-site/img/char-cat.webp","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"/_not-found","h":96,"c":"$Q2"}]]
-0:{"b":"aAr7qbLe7JNVBziplGoGs","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"oMGtwjQCJ8y7ZoafCEOIH","t":{"t":{"s":"","h":80,"c":"$Q1"}}}

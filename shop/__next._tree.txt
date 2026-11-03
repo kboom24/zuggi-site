@@ -1,4 +1,4 @@
-:HL["/zuggi-site/_next/static/chunks/21pw-93zpu6of.css","style"]
+:HL["/zuggi-site/_next/static/chunks/04pmwz-xzdewp.css","style"]
 :HL["/zuggi-site/_next/static/media/Inter-s.p.41ez0mtecz9zy.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/zuggi-site/_next/static/media/Oswald-s.p.2u2n_bbwrj24j.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/zuggi-site/_next/static/media/PassionOne-s.p.33i26zoj-qsyo.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -6,4 +6,4 @@
 :HL["/zuggi-site/img/m-hoodie.webp","image"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"shop","h":96,"c":"$Q2"}]]
-0:{"b":"aAr7qbLe7JNVBziplGoGs","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"oMGtwjQCJ8y7ZoafCEOIH","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
