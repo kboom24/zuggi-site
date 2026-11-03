@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@theme {
+  --color-magenta: #ff0b8a;
+  --color-magenta-600: #e00077;
+  --color-cyan: #00f0ff;
+  --color-ink: #1a0d2e;
+  --color-night: #0d0717;
+  --color-panel: #160c26;
+  --color-line: #2a1b45;
+  --color-lavender: #c72cff;
+  --color-muted: #b8a9d6;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-brand: var(--font-racing), "Arial Black", sans-serif;
+}
+
+html {
+  background: var(--color-night);
+  color: #fff;
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(199, 44, 255, 0.12), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(255, 11, 138, 0.07), transparent 60%),
+    var(--color-night);
+  min-height: 100vh;
+}
+
+/* Horizontal scroll rows on small screens */
+.scroll-row {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.scroll-row::-webkit-scrollbar { display: none; }
+.scroll-row > * { scroll-snap-align: start; }
+
+/* Wordmark */
+.wordmark {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  letter-spacing: 0.005em;
+  color: var(--color-magenta);
+  -webkit-text-stroke: 0.07em #120818;
+  paint-order: stroke fill;
+  text-shadow:
+    0.06em 0.06em 0 #120818,
+    0.1em 0.03em 0 var(--color-cyan);
+  transform: skewX(-12deg);
+  display: inline-block;
+  line-height: 1;
+}
+
+.neon-card {
+  border: 1px solid var(--color-line);
+  transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.neon-card:hover, .neon-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--color-magenta);
+  box-shadow: 0 0 0 1px var(--color-magenta), 0 10px 30px -10px rgba(255, 11, 138, .55);
+}
+
+.halftone {
+  background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1.2px);
+  background-size: 6px 6px;
+}
+
+@keyframes zg-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-8px) } }
+.animate-bob { animation: zg-bob 1.4s ease-in-out infinite; }
+@keyframes zg-bar { 0% { transform: translateX(-100%) } 100% { transform: translateX(250%) } }
+.animate-bar { animation: zg-bar 1.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-bob, .animate-bar { animation: none; }
+  .neon-card:hover { transform: none; }
+}
