@@ -68,6 +68,7 @@ export default async function ChapterPage({ params }: Props) {
                 <div key={i} className={`mx-auto my-8 max-w-[640px] rounded-md border-l-4 ${s.end ? "border-cyan text-center" : "border-magenta"} bg-[#1A0D2E] px-6 py-5 text-[18px] leading-relaxed text-white sm:text-[19px]`}>
                   {s.speaker && <p className="mb-1 text-xs font-semibold uppercase tracking-widest text-cyan">{s.speaker}</p>}
                   <p className={s.speaker ? "" : "italic"}>{s.text}</p>
+                  {s.href && <Link href={s.href} className="mt-4 inline-block rounded-md bg-magenta px-4 py-2 text-sm font-semibold not-italic">{s.cta ?? "Next chapter →"}</Link>}
                 </div>
               );
             });
