@@ -49,9 +49,23 @@ Without these env vars the form shows a friendly success message and saves nothi
 
 ## 4. GitHub Pages (preview)
 
-`.github/workflows/pages.yml` builds with `GITHUB_PAGES=true` (adds `basePath`/`assetPrefix` `/zuggi-site`, trailing slashes, unoptimized images) and deploys `out/` to Pages on every push to `main`.
+`deploy/github-pages-workflow.yml` (move it to `.github/workflows/` to activate) builds with `GITHUB_PAGES=true` (adds `basePath`/`assetPrefix` `/zuggi-site`, trailing slashes, unoptimized images) and deploys `out/` to Pages on every push to `main`.
 
 - Enable once: repo **Settings → Pages → Source: GitHub Actions** (or `gh api -X POST repos/<owner>/zuggi-site/pages -f build_type=workflow`).
 - Preview URL: `https://<owner>.github.io/zuggi-site/`
 - Local check: `GITHUB_PAGES=true npm run build` then serve `out/` under `/zuggi-site`.
 - Free GitHub Pages requires a public repository.
+
+### Current preview setup (gh-pages branch)
+
+The gh CLI token used to create the preview has no `workflow` scope, so the Actions workflow could not be pushed. The preview is instead published from the **`gh-pages` branch** (static `out/` from `GITHUB_PAGES=true npm run build`, plus `.nojekyll`), with Pages source = `gh-pages` / root.
+
+To redeploy the preview manually:
+
+```bash
+GITHUB_PAGES=true NEXT_PUBLIC_SITE_URL=https://kboom24.github.io npm run build
+touch out/.nojekyll
+npx gh-pages -d out -t   # or push out/ to the gh-pages branch any other way
+```
+
+To switch to automatic deploys: move `deploy/github-pages-workflow.yml` to `.github/workflows/pages.yml`, push it with a token that has the `workflow` scope (`gh auth refresh -s workflow`), and set Pages source to **GitHub Actions**.
