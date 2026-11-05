@@ -23,6 +23,7 @@ const PG = (ch: number, n: number): Segment => ({ type: "page", src: `/comics/ch
 const P = (n: number) => PG(1, n);
 const P2 = (n: number) => PG(2, n);
 const P3 = (n: number) => PG(3, n);
+const P4 = (n: number) => PG(4, n);
 const C = (text: string): Segment => ({ type: "caption", text });
 const L = (text: string): Segment => ({ type: "caption", text, label: true });
 
@@ -141,7 +142,44 @@ const ch3Segments: Segment[] = [
   C("Nobody notices Jinx leave. Nobody ever does."),
   L("The Glitch King's tower"),
   P3(12),
-  { type: "caption", end: true, text: "Next — Chapter 4: Boss Rush. The Squad storms the King's tower. But the King already knows they're coming." },
+  { type: "caption", end: true, text: "Next — Chapter 4: Boss Rush. The Squad storms the King's tower. But the King already knows they're coming.", href: "/read/chapter-4-boss-rush/", cta: "Read Chapter 4 →" },
+];
+
+const ch4Segments: Segment[] = [
+  L("The Glitch King's tower — The same night"),
+  C("The King doesn't want Zuggi deleted. He wants something only Zuggi can do."),
+  P4(1),
+  C("An hour later the cat is back, and it found exactly what the Squad needs."),
+  C("A rule every gamer knows: beat the boss, and everything he took comes back. The power. The deleted people. All of it."),
+  P4(2),
+  C("Rei hasn't told anyone what she read on that wall. Instead she's going to do the next best thing: keep the cat where she can see it."),
+  L("The tower gates"),
+  C("The front door is guarded. Byte has a plan. It involves boxes."),
+  P4(3),
+  C("Stealth mode lasted eleven seconds. Combat mode lasts ninety-nine floors."),
+  P4(4),
+  C("One elevator ride to the top. Possibly the last quiet minute they'll have."),
+  P4(5),
+  L("Floor 100 — The final door"),
+  C("Only Player 1 can open the King's door. And in the Grid, a team's shields come from Player 1. If he quits, everyone loses their protection."),
+  C("Zuggi knows this. He also knows what happened the last time he faced a final boss."),
+  P4(6),
+  C("He does what he always does."),
+  P4(7),
+  L("The throne room"),
+  C("The King never needed Zuggi to open the door. He needed Zuggi to run."),
+  P4(8),
+  C("Rei has been carrying her brother's warning since Chapter 2. It just came out."),
+  P4(9),
+  C("Jinx has deleted things for the King before. Never like this. Never people it had started to like."),
+  P4(10),
+  L("Meanwhile — Far below"),
+  C("Zuggi runs until the Grid runs out. Then it spits him back into the real world."),
+  P4(11),
+  L("The throne room"),
+  C("Back in the cage, Byte does it again. This time it isn't one word."),
+  P4(12),
+  { type: "caption", end: true, text: "Next — Chapter 5: Continue? Zuggi is alone in a city going grey. And someone he didn't expect comes to find him." },
 ];
 
 export const chapters: Chapter[] = [
@@ -196,7 +234,23 @@ export const chapters: Chapter[] = [
       { name: "Jinx", img: "/img/char-cat.webp", line: "Innocent. Definitely. Probably." },
     ],
   },
-  { slug: "chapter-4-bytes-secret", number: 4, title: "Byte's Secret", synopsis: "Byte has been carrying something it was never supposed to find.", cover: "/img/ch4.webp", pages: [], panelCount: 8 },
+  {
+    slug: "chapter-4-boss-rush",
+    number: 4,
+    title: "Boss Rush",
+    synopsis: "Jinx leads the Squad to the Glitch King's tower, where beating the boss would bring back everything he deleted. Ninety-nine floors later, only Player 1 can open the final door. Zuggi does what he always does, and the King was counting on it.",
+    cover: "/comics/ch4/cover.webp",
+    pages: Array.from({ length: 12 }, (_, i) => `/comics/ch4/p${String(i + 1).padStart(2, "0")}.webp`),
+    panelCount: 0,
+    segments: ch4Segments,
+    cast: [
+      { name: "Zuggi", img: "/img/char-fox.webp", line: "Player 1. The only one who can open the door." },
+      { name: "Kai Vega", img: "/img/char-skater.webp", line: "Already planning pizza for after." },
+      { name: "Rei Kurogane", img: "/img/char-katana.webp", line: "Keeping two secrets. Watching the cat." },
+      { name: "Byte", img: "/img/char-robot.webp", line: "Builds disguises. Carries a voice." },
+      { name: "Jinx", img: "/img/char-cat.webp", line: "Has a job to do for the King." },
+    ],
+  },
   { slug: "chapter-5-nine-lives", number: 5, title: "Nine Lives", synopsis: "Jinx has had a few close calls. Eight, to be exact.", cover: "/img/ch5.webp", pages: [], panelCount: 8 },
   { slug: "chapter-6-neon-storm", number: 6, title: "Neon Storm", synopsis: "The storm hits Neon City and the whole squad has to hold the line.", cover: "/img/ch6.webp", pages: [], panelCount: 8 },
 ];
